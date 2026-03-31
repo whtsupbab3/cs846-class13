@@ -5,53 +5,55 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(to bottom, #6a0dad, #000000, #ffffff);
-  color: #ffffff;
+  background: #0d1117;
+  color: #c9d1d9;
 }
 
 button {
-  background-color: #6a0dad;
+  background-color: #238636;
   color: #ffffff;
-  border: none;
+  border: 1px solid #30363d;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #4b0082;
+  background-color: #2ea043;
 }
 
 textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #6a0dad;
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #000000;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background-color: #0d1117;
+  color: #c9d1d9;
   font-size: 1rem;
 }
 
 textarea::placeholder {
-  color: #6a0dad;
+  color: #8b949e;
 }
 
 .post {
-  background-color: #4b0082;
-  color: #ffffff;
+  background-color: #0d1117;
+  color: #c9d1d9;
   padding: 15px;
   margin: 10px 0;
-  border-radius: 10px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
 }
 
 .reply {
-  background-color: #6a0dad;
-  color: #ffffff;
+  background-color: #0d1117;
+  color: #c9d1d9;
   padding: 10px;
   margin: 5px 0 0 20px;
-  border-radius: 8px;
+  border-radius: 6px;
+  border-left: 2px solid #f85149;
 }
 
 .logout-container {
@@ -61,18 +63,18 @@ textarea::placeholder {
 }
 
 .logout-container button {
-  background-color: #4b0082;
+  background-color: #238636;
   color: #ffffff;
-  border: none;
+  border: 1px solid #30363d;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s;
 }
 
 .logout-container button:hover {
-  background-color: #6a0dad;
+  background-color: #2ea043;
 }
 
 /* ── Auth Page Layout ── */
@@ -118,7 +120,7 @@ textarea::placeholder {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background: #ffffff;
+  background: #0d1117;
 }
 
 .auth-card {
@@ -128,7 +130,7 @@ textarea::placeholder {
 
 .twitter-logo-small {
   font-size: 2rem;
-  color: #1D9BF0;
+  color: #58a6ff;
   display: block;
   margin-bottom: 1.5rem;
 }
@@ -136,7 +138,7 @@ textarea::placeholder {
 /* ── Tabs ── */
 .auth-tabs {
   display: flex;
-  border-bottom: 1px solid #CFD9DE;
+  border-bottom: 1px solid #30363d;
   margin-bottom: 2rem;
 }
 
@@ -149,18 +151,18 @@ textarea::placeholder {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  color: #536471;
+  color: #8b949e;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 
 .auth-tab:hover {
-  background: rgba(29, 155, 240, 0.08);
-  color: #1D9BF0;
+  background: rgba(88, 166, 255, 0.08);
+  color: #58a6ff;
 }
 
 .auth-tab.active {
-  color: #1D9BF0;
-  border-bottom-color: #1D9BF0;
+  color: #58a6ff;
+  border-bottom-color: #f85149;
 }
 
 /* ── Responsive ── */
@@ -207,28 +209,30 @@ textarea::placeholder {
   display: flex;
   height: 100vh;
   width: 100%;
-  background: white;
+  background: #0d1117;
 }
 
 .register-container {
-  width: 60%;
-  min-width: 400px;
+  width: 100vw;
+  min-width: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
-  padding: 4rem 0;
+  background: #0d1117;
+  padding: 0;
 }
 
 .auth-form-wrapper {
   width: 100%;
   max-width: 420px;
   padding: 2.5rem 2.5rem 2rem 2.5rem;
-  background: white;
+  background: #0d1117;
   text-align: left;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  box-shadow: none;
+  border: 1px solid #30363d;
 }
 
 @media (max-width: 900px) {
@@ -247,13 +251,13 @@ textarea::placeholder {
   font-size: 2.2rem;
   font-weight: 700;
   margin: 0 0 0.75rem 0;
-  color: #000;
+  color: #c9d1d9;
   text-align: center;
 }
 
 .auth-subtitle {
   font-size: 1.05rem;
-  color: #666;
+  color: #8b949e;
   margin: 0 0 2.5rem 0;
   text-align: center;
 }
@@ -261,7 +265,7 @@ textarea::placeholder {
 .auth-footer {
   text-align: center;
   margin-top: 2rem;
-  color: #666;
+  color: #8b949e;
   font-size: 1rem;
 }
 
@@ -269,7 +273,7 @@ textarea::placeholder {
   width: 100%;
   max-width: 420px;
   padding: 2.5rem;
-  background: white;
+  background: #0d1117;
   text-align: left;
 }
 
@@ -277,13 +281,13 @@ textarea::placeholder {
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
-  color: #000;
+  color: #c9d1d9;
 }
 
 .switch-button {
   background: none;
   border: none;
-  color: #007bff;
+  color: #58a6ff;
   cursor: pointer;
   font-size: 1rem;
   text-decoration: underline;
@@ -292,5 +296,5 @@ textarea::placeholder {
 }
 
 .switch-button:hover {
-  color: #0056b3;
+  color: #79c0ff;
 }

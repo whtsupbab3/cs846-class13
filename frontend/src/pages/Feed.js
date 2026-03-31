@@ -7,52 +7,60 @@ const Feed = () => {
   const [newPost, setNewPost] = useState('');
   const navigate = useNavigate();
 
-  const currentUser = (() => {
-    const token = localStorage.getItem('authToken');
-    if (!token) return { username: 'Guest' };
-    try { return JSON.parse(atob(token.split('.')[1])); }
-    catch { return { username: 'Guest' }; }
-  })();
+  const token = localStorage.getItem('authToken');
 
   useEffect(() => {
-    // Simulate fetching posts from a server
     const fetchPosts = async () => {
-      const fetchedPosts = [
-        { id: 1, content: 'Hello World!', likes: 5, replies: [], author: { username: 'Alice', email: 'alice@example.com' } },
-        { id: 2, content: 'This is a second post.', likes: 3, replies: [], author: { username: 'Bob', email: 'bob@example.com' } }
-      ];
-      setPosts(fetchedPosts);
+      const res = await fetch('/api/posts');
+      const data = await res.json();
+      setPosts(data);
     };
 
     fetchPosts();
   }, []);
 
-  const handlePostSubmit = () => {
+  const handlePostSubmit = async () => {
     if (newPost.trim() !== '' && newPost.length <= 280) {
-      const newPostObject = {
-        id: Date.now(),
-        content: newPost,
-        likes: 0,
-        replies: [],
-        author: currentUser
-      };
-      setPosts([newPostObject, ...posts]);
-      setNewPost('');
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ content: newPost })
+      });
+      if (res.ok) {
+        const created = await res.json();
+        setPosts([created, ...posts]);
+        setNewPost('');
+      }
     }
   };
 
-  const handleLike = (postId) => {
-    setPosts(posts.map(post => 
-      post.id === postId ? { ...post, likes: post.likes + 1 } : post
-    ));
+  const handleLike = async (postId) => {
+    const res = await fetch(`/api/posts/${postId}/like`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (res.ok) {
+      const { liked } = await res.json();
+      setPosts(posts.map(post =>
+        post.id === postId ? { ...post, likes: post.likes + (liked ? 1 : -1) } : post
+      ));
+    }
   };
 
-  const handleReply = (postId, replyContent) => {
-    setPosts(posts.map(post => 
-      post.id === postId 
-        ? { ...post, replies: [...post.replies, { id: Date.now(), content: replyContent, author: currentUser }] } 
-        : post
-    ));
+  const handleReply = async (postId, replyContent) => {
+    const res = await fetch(`/api/posts/${postId}/comments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ content: replyContent })
+    });
+    if (res.ok) {
+      const comment = await res.json();
+      setPosts(posts.map(post =>
+        post.id === postId
+          ? { ...post, replies: [...post.replies, comment] }
+          : post
+      ));
+    }
   };
 
   return (
@@ -71,7 +79,7 @@ const Feed = () => {
         {posts.map((post) => (
           <div key={post.id} className="post">
             <p>
-              <strong>{post.author.username}</strong> ({post.author.email})
+              <strong>{post.author.username}</strong>
               <button onClick={() => navigate(`/profile/${post.author.username}`)}>View Profile</button>
             </p>
             <p>{post.content}</p>

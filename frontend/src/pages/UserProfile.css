@@ -8,7 +8,7 @@
 .profile-back {
   background: none;
   border: none;
-  color: #c084fc;
+  color: #58a6ff;
   font-size: 0.95rem;
   cursor: pointer;
   padding: 0;
@@ -16,7 +16,7 @@
 }
 
 .profile-back:hover {
-  color: #e879f9;
+  color: #79c0ff;
 }
 
 .profile-header {
@@ -30,13 +30,13 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7c3aed, #4b0082);
+  background: #30363d;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #c9d1d9;
   flex-shrink: 0;
 }
 
@@ -50,10 +50,11 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  background: #1e1e2e;
-  border-radius: 12px;
+  background: #161b22;
+  border-radius: 6px;
   padding: 1rem 1.5rem;
   margin-bottom: 2rem;
+  border: 1px solid #30363d;
 }
 
 .profile-stat {
@@ -69,7 +70,7 @@
 
 .stat-label {
   font-size: 0.8rem;
-  color: #a0a0b0;
+  color: #8b949e;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -77,43 +78,45 @@
 .profile-stat-divider {
   width: 1px;
   height: 36px;
-  background: #3a3a5c;
+  background: #30363d;
 }
 
 .profile-posts-heading {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #d1d1e0;
+  color: #c9d1d9;
 }
 
 .profile-post {
-  background: #1e1e2e;
-  border-radius: 12px;
+  background: #0d1117;
+  border-radius: 6px;
   padding: 1rem 1.25rem;
   margin-bottom: 0.75rem;
+  border: 1px solid #30363d;
 }
 
 .profile-post-content {
   margin: 0 0 0.75rem 0;
   line-height: 1.5;
+  color: #c9d1d9;
 }
 
 .profile-post-meta {
   display: flex;
   gap: 1.25rem;
   font-size: 0.82rem;
-  color: #a0a0b0;
+  color: #8b949e;
 }
 
 .profile-no-posts {
-  color: #a0a0b0;
+  color: #8b949e;
   font-style: italic;
 }
 
 .profile-loading,
 .profile-error {
-  color: #a0a0b0;
+  color: #8b949e;
   text-align: center;
   margin-top: 3rem;
 }
