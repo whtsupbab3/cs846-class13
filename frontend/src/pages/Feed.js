@@ -2,6 +2,8 @@ import './Feed.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const BACKEND_URL = 'http://localhost:3001';
+
 const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState('');
@@ -11,9 +13,17 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/posts');
-      const data = await res.json();
-      setPosts(data);
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/posts`);
+        if (!res.ok) {
+          console.error('Failed to fetch posts:', res.status);
+          return;
+        }
+        const data = await res.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
     };
 
     fetchPosts();
@@ -21,7 +31,7 @@ const Feed = () => {
 
   const handlePostSubmit = async () => {
     if (newPost.trim() !== '' && newPost.length <= 280) {
-      const res = await fetch('/api/posts', {
+      const res = await fetch(`${BACKEND_URL}/api/posts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ content: newPost })
@@ -35,7 +45,7 @@ const Feed = () => {
   };
 
   const handleLike = async (postId) => {
-    const res = await fetch(`/api/posts/${postId}/like`, {
+    const res = await fetch(`${BACKEND_URL}/api/posts/${postId}/like`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -48,7 +58,7 @@ const Feed = () => {
   };
 
   const handleReply = async (postId, replyContent) => {
-    const res = await fetch(`/api/posts/${postId}/comments`, {
+    const res = await fetch(`${BACKEND_URL}/api/posts/${postId}/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ content: replyContent })

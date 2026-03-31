@@ -1,3 +1,131 @@
 .feed-container {
   padding: 2rem;
+  width: 100%;
+  max-width: 900px;
 }
+
+.feed-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 2rem 0;
+  color: #c9d1d9;
+  border-bottom: 2px solid #58a6ff;
+  padding-bottom: 1rem;
+}
+
+.post-creator {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.post-creator textarea {
+  resize: vertical;
+  min-height: 100px;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.post-creator button {
+  align-self: flex-end;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.post:hover {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 1px rgba(88, 166, 255, 0.1);
+}
+
+.post p {
+  margin: 0.75rem 0;
+  line-height: 1.5;
+}
+
+.post > p:first-child {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #30363d;
+}
+
+.post strong {
+  color: #58a6ff;
+  font-weight: 600;
+}
+
+.post > p:last-of-type {
+  font-size: 1.05rem;
+  margin: 1rem 0;
+  color: #c9d1d9;
+}
+
+.post > button {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.post > button:hover {
+  background-color: #2ea043;
+  transform: scale(1.02);
+}
+
+.replies {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #30363d;
+}
+
+.reply {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  border-radius: 6px;
+  border-left: 3px solid #f85149;
+}
+
+.reply p {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.reply strong {
+  color: #f85149;
+}
+
+.replies textarea {
+  width: 100%;
+  margin: 1rem 0 0.75rem 0;
+  padding: 0.75rem;
+  min-height: 70px;
+}
+
+.replies button {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+

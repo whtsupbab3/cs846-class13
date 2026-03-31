@@ -10,7 +10,7 @@ const path = require('path');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Middleware
 app.use((req, res, next) => {
@@ -23,7 +23,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // Database connection
-const db = new sqlite3.Database('./database.sqlite', (err) => {
+const dbPath = process.env.NODE_ENV === 'test' ? ':memory:' : './database.sqlite';
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Error opening database:', err.message);
   } else {
@@ -113,7 +114,7 @@ app.post('/login', async (req, res) => {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET || 'test-secret', {
         expiresIn: '1h',
       });
 
@@ -130,7 +131,7 @@ const authenticateToken = (req, res, next) => {
   const auth = req.headers['authorization'];
   const token = auth && auth.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'No token provided' });
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET || 'test-secret', (err, user) => {
     if (err) return res.status(403).json({ error: 'Invalid token' });
     req.user = user;
     next();
@@ -252,15 +253,20 @@ app.get('/api/users/:username', (req, res) => {
   });
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+// Serve static files from the React app (only in production)
+if (process.env.NODE_ENV !== 'test') {
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  // Catch-all route to serve React app for non-API routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  });
+}
 
-// Catch-all route to serve React app for non-API routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
+// Start server only if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
 
-// Start server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+module.exports = { app, db };

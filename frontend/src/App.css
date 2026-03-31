@@ -213,15 +213,16 @@ textarea::placeholder {
 }
 
 .register-container {
-  width: 100vw;
+  width: 100%;
   min-width: 0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: #0d1117;
-  padding: 0;
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .auth-form-wrapper {
@@ -233,13 +234,13 @@ textarea::placeholder {
   border-radius: 6px;
   box-shadow: none;
   border: 1px solid #30363d;
+  margin: auto;
 }
 
 @media (max-width: 900px) {
   .register-container {
     width: 100%;
-    min-width: unset;
-    padding: 2rem 0;
+    padding: 1rem;
   }
   .auth-form-wrapper {
     max-width: 95vw;
